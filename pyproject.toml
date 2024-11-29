@@ -5,6 +5,7 @@ description = "Python module to support quickly reading and rolling with TTRPG r
 authors = ["Alex Davis <8m3xlt@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
+packages = [{include = "pyrpgtables"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
