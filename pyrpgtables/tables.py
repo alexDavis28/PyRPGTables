@@ -1,5 +1,6 @@
 import random
 from dataclasses import dataclass
+from . import exceptions
 
 @dataclass
 class TableResult:
@@ -27,3 +28,16 @@ class Table:
             for value in row.roll_range:
                 self.roll_values.add(value)
                 self.lookup_table[value] = row.row_text
+
+    def to_json(self) -> dict:
+        return {
+            "lookup_table": self.lookup_table,
+            "roll_values": self.roll_values
+        }
+
+    def from_json(self, json_data: dict) -> None:
+        try:
+            self.roll_values = json_data["roll_values"]
+            self.lookup_table = json_data["lookup_table"]
+        except KeyError:
+            raise exceptions.InvalidTableJson()
